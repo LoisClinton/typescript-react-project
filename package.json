@@ -1,6 +1,6 @@
 {
   "name": "typescript-react-project",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "scripts": {
     "test": "jest",
     "client-dev": "parcel public/index.html --open",
@@ -11,6 +11,8 @@
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
+    "@types/react": "^16",
+    "@types/react-dom": "^16",
     "cors": "^2.8.5",
     "dotenv": "16.0.0",
     "express": "^4.17.1",
@@ -29,6 +31,7 @@
     "@testing-library/react": "^12.0.0",
     "babel-jest": "^27.1.0",
     "jest": "^27.1.0",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "typescript": "^3"
   }
 }
