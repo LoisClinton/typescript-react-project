@@ -1,10 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
+import "regenerator-runtime/runtime";
 
-class App extends React.PureComponent {
-  render() {
-    return <h1>Hello World!</h1>;
-  }
-}
+import { App } from "./App.js";
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const root = createRoot(document.getElementById("root")!);
+root.render(<App />);
+
+// REMOVED THE FOLLOWING:
+
+// class App extends React.PureComponent {
+//   render() {
+//     return <h1>Hello World!</h1>;
+//   }
+// }
+
+// ReactDOM.render(<App />, document.getElementById("app"));
