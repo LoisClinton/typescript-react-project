@@ -24,4 +24,15 @@ router.get("/:name", async (req, res) => {
   }
 });
 
+router.get("/:name/CatNum", async (req, res) => {
+  try {
+    //getting one topics
+    const topic = await Topic.findOne({ where: { name: req.params.name } });
+    return res.send({ categoryNumber: topic.categoryNumber });
+  } catch (error) {
+    //send any erros
+    return res.send(error);
+  }
+});
+
 module.exports = router;
