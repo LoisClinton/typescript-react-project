@@ -6,7 +6,7 @@ import router from "./router";
   /* <h1>Hello There World!</h1> */
 }
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
     <React.StrictMode>
       <RouterProvider router={router} />
