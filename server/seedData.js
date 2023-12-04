@@ -1,0 +1,42 @@
+module.exports = {
+  users: [
+    { displayName: "TodTheGod", password: "1234", email: "tod@gmail.com" },
+    {
+      displayName: "LuckyLuke",
+      password: "myPassword",
+      email: "datBoi@gmail.com",
+    },
+    { displayName: "CoolDude", password: "djakbfajl", email: "vsv@gmail.com" },
+    {
+      displayName: "SomeoneInnit",
+      password: "fwasfljsf",
+      email: "sfsv@gmail.com",
+    },
+    {
+      displayName: "ProgrammingGod",
+      password: "euohfw7",
+      email: "sfg@gmail.com",
+    },
+  ],
+  topics: [
+    { name: "General Knowledge", categoryNumber: 9 },
+    { name: "Books", categoryNumber: 10 },
+    { name: "Film", categoryNumber: 11 },
+    { name: "Music", categoryNumber: 12 },
+    { name: "Television", categoryNumber: 14 },
+    { name: "Video Games", categoryNumber: 15 },
+    { name: "Board Games", categoryNumber: 16 },
+    { name: "Science & Nature", categoryNumber: 17 },
+    { name: "Computers", categoryNumber: 18 },
+    { name: "Mythology", categoryNumber: 20 },
+    { name: "Sports", categoryNumber: 21 },
+    { name: "Geography", categoryNumber: 22 },
+    { name: "History", categoryNumber: 23 },
+    { name: "Celebrities", categoryNumber: 26 },
+    { name: "Animals", categoryNumber: 27 },
+    { name: "Vehicles", categoryNumber: 28 },
+    { name: "Comics", categoryNumber: 29 },
+    { name: "Anime and Manga", categoryNumber: 31 },
+    { name: "Cartoon & Animations", categoryNumber: 32 },
+  ],
+};

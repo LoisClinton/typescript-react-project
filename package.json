@@ -6,13 +6,15 @@
     "client-dev": "parcel public/index.html --open",
     "server-dev": "nodemon server/server.js",
     "seed": "node server/seed.js",
-    "start": "parcel build public/index.html && npm run seed && node server/server.js"
+    "start2": "parcel src/index.html",
+    "start": "parcel build src/index.html && npm run seed && node server/server.js"
   },
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
-    "@types/react": "^16",
-    "@types/react-dom": "^16",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.17",
+    "@types/react-router-dom": "^5.3.3",
     "cors": "^2.8.5",
     "dotenv": "16.0.0",
     "express": "^4.17.1",
@@ -22,15 +24,17 @@
     "parcel": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.19.0",
+    "react-router-dom": "^6.20.0",
     "react-test-renderer": "^18.2.0",
-    "sequelize": "^6.23.2",
+    "sequelize": "^6.35.1",
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "@testing-library/react": "^12.0.0",
+    "@testing-library/react": "^14.1.2",
     "babel-jest": "^27.1.0",
     "jest": "^27.1.0",
+    "parcel-bundler": "^1",
+    "parcel-plugin-bundle-visualiser": "^1",
     "process": "^0.11.10",
     "typescript": "^3"
   }
