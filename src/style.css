@@ -43,6 +43,14 @@ main {
   border-radius: 13px;
 }
 
+.difficulty-popup {
+  z-index: 2;
+  width: 500px;
+  height: 200px;
+  background-color: #373737;
+  color: #fff500;
+}
+
 /* WIDTHS */
 .full-width {
   width: 100%;

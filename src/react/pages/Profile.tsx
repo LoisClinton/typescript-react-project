@@ -8,7 +8,6 @@ import NavBar from "../components/NavBar";
 const Profile: React.FC = () => {
   return (
     <main>
-      <NavBar></NavBar>
       <h1 className="text-yellow text-logo-large font-monomaniacone">
         "Profile Page"
       </h1>

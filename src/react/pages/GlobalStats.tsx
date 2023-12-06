@@ -8,7 +8,6 @@ import NavBar from "../components/NavBar";
 const GlobalStats: React.FC = () => {
   return (
     <main>
-      <NavBar></NavBar>
       <h1 className="text-yellow text-logo-large font-monomaniacone">
         "Global Statistics Page"
       </h1>

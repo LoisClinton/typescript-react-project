@@ -1,53 +1,50 @@
-import React, { useState, useEffect } from "react";
-import QuizButton from "../components/QuizButton";
+import React, { createContext, useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
+//creating the context to store the searchText state
+
+interface TopicInterface {
+  name: string;
+  categoryNumber: number;
+}
+
+interface QuizDetailsConfig {
+  Topic: TopicInterface;
+  Difficulty: "easy" | "medium" | "hard";
+}
+
+// the type of the context 'value' down below
+type QuizContextType = {
+  quizDetails: QuizDetailsConfig | null;
+  setQuizDetails: React.Dispatch<
+    React.SetStateAction<QuizDetailsConfig | null>
+  >;
+};
+
+type QuizContextTypeWithNull = QuizContextType | null;
+
+const QuizContext = createContext<QuizContextTypeWithNull>(null);
 
 const Home: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [allQuizTopics, setAllQuizTopics] = useState([]);
-  const [quizDifficulty, setQuizDifficulty] = useState("");
+  const [quizDetails, setQuizDetails] = useState<QuizDetailsConfig | null>(
+    null
+  );
 
-  async function getAllQuizTopics() {
-    const res = await fetch(`http://localhost:3000/api/topics/`);
-    const data = await res.json();
-    setAllQuizTopics(data);
-    setIsLoading(false);
-  }
-
-  useEffect(() => {
-    getAllQuizTopics();
-  }, []);
-
-  return isLoading ? (
-    <div>LOADING</div>
-  ) : (
-    <main>
+  return (
+    <QuizContext.Provider value={{ quizDetails, setQuizDetails }}>
       <NavBar></NavBar>
-      <h1 className="text-yellow text-logo-large font-monomaniacone">
-        QwikWitt
-      </h1>
-
-      <h3 className="text-yellow font-opensans landing-slogan">
-        Need to strech your cognitive legs? Get Quizzing!
-      </h3>
-
-      <div className="landing-page-topics-container">
-        {allQuizTopics.map((quizTopic, idx) => {
-          return (
-            <QuizButton
-              quizDifficulty={quizDifficulty}
-              setQuizDifficulty={setQuizDifficulty}
-              index={idx}
-              quizTopic={quizTopic}
-            />
-          );
-        })}
-      </div>
-    </main>
+      <Outlet />
+    </QuizContext.Provider>
   );
 };
 
-export default Home;
+export {
+  Home,
+  QuizContext,
+  TopicInterface,
+  QuizDetailsConfig,
+  QuizContextTypeWithNull,
+};

@@ -1,25 +1,57 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import QuizDifficulty from "./QuizDifficulty";
+import { QuizDetailsConfig } from "../pages/Home";
 
 interface QuizButtonProps {
   index: number;
   quizTopic: { name: string; categoryNumber: number };
+  quizDetails: QuizDetailsConfig | null;
+  setQuizDetails: React.Dispatch<
+    React.SetStateAction<QuizDetailsConfig | null>
+  >;
 }
+type isSelectDifficultyType = true | false;
+type setIsSelectDifficultyType = React.Dispatch<
+  React.SetStateAction<true | false>
+>;
 
-const QuizButton: React.FC<QuizButtonProps> = ({ quizTopic }) => {
+const QuizButton: React.FC<QuizButtonProps> = ({
+  quizTopic,
+  quizDetails,
+  setQuizDetails,
+}) => {
+  const [isSelectDifficulty, setIsSelectDifficulty] = useState<boolean>(false);
+
+  //   if (!quizContext) {
+  //     // Handle the case where the context is not yet available
+  //     return null;
+  //   }
+  const handleQuizClick = () => {
+    return setIsSelectDifficulty(true);
+  };
+
   const [categoryNum, setCategoryNum] = useState(quizTopic.categoryNumber);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="background-light-grey quiz-topic-container">
-      <h3 className="text-yellow font-opensans container-heading">
-        {quizTopic.name}
-      </h3>
-      <div>Your quiz stats will go here eventually</div>
-      <div className="full-width container-buttons-right">
-        <button className="button-colors topic-button">Stats</button>
-        <button className="button-colors topic-button">Quiz time!</button>
+    <>
+      {isSelectDifficulty ? <QuizDifficulty /> : " "}
+      <div className="background-light-grey quiz-topic-container">
+        <h3 className="text-yellow font-opensans container-heading">
+          {quizTopic.name}
+        </h3>
+        <div>Your quiz stats will go here eventually</div>
+        <div className="full-width container-buttons-right">
+          <button className="button-colors topic-button">Stats</button>
+          <button
+            className="button-colors topic-button"
+            onClick={() => handleQuizClick()}
+          >
+            Quiz time!
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
