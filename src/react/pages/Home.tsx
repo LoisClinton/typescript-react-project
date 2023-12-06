@@ -24,6 +24,7 @@ type QuizContextType = {
   >;
 };
 
+//how do I extend a type
 type QuizContextTypeWithNull = QuizContextType | null;
 
 const QuizContext = createContext<QuizContextTypeWithNull>(null);
