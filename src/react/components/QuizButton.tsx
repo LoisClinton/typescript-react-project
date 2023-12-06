@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import QuizDifficulty from "./QuizDifficulty";
 import { QuizDetailsConfig } from "../pages/Home";
 
@@ -10,10 +10,6 @@ interface QuizButtonProps {
     React.SetStateAction<QuizDetailsConfig | null>
   >;
 }
-type isSelectDifficultyType = true | false;
-type setIsSelectDifficultyType = React.Dispatch<
-  React.SetStateAction<true | false>
->;
 
 const QuizButton: React.FC<QuizButtonProps> = ({
   quizTopic,
@@ -26,16 +22,23 @@ const QuizButton: React.FC<QuizButtonProps> = ({
   //     // Handle the case where the context is not yet available
   //     return null;
   //   }
+
+  const [categoryNum, setCategoryNum] = useState(quizTopic.categoryNumber);
   const handleQuizClick = () => {
     return setIsSelectDifficulty(true);
   };
 
-  const [categoryNum, setCategoryNum] = useState(quizTopic.categoryNumber);
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
-      {isSelectDifficulty ? <QuizDifficulty /> : " "}
+      {isSelectDifficulty ? (
+        <QuizDifficulty
+          quizTopic={quizTopic}
+          quizDetails={quizDetails}
+          setQuizDetails={setQuizDetails}
+        />
+      ) : (
+        " "
+      )}
       <div className="background-light-grey quiz-topic-container">
         <h3 className="text-yellow font-opensans container-heading">
           {quizTopic.name}
