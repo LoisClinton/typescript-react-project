@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Monomaniac+One&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Play:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #373737;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  width: 100vw;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.landing-page-topics-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.quiz-topic-container {
+  height: 200px;
+  width: 300px;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 13px;
+}
+
+/* WIDTHS */
+.full-width {
+  width: 100%;
+}
+
+/* SPACING */
+.container-heading {
+  margin-top: 20px;
+}
+.landing-slogan {
+  margin-bottom: 50px;
+}
+
+/* FONT */
+.font-hedvigletterssans {
+  font-family: "Hedvig Letters Sans", sans-serif;
+}
+.font-monomaniacone {
+  font-family: "Monomaniac One", sans-serif;
+}
+.font-opensans {
+  font-family: "Open Sans", sans-serif;
+}
+.font-play {
+  font-family: "Play", sans-serif;
+}
+
+/* TEXT */
+.text-yellow {
+  color: #fff500;
+}
+.text-light-grey {
+  color: #686868;
+}
+.text-dark-grey {
+  color: #373737;
+}
+
+/* BACKGROUND */
+.background-yellow {
+  background-color: #fff500;
+}
+.background-light-grey {
+  background-color: #686868;
+}
+.background-dark-grey {
+  background-color: #373737;
+}
+
+/* TEXT SIZING */
+.text-small {
+  font-size: small;
+}
+.text-medium {
+  font-size: medium;
+}
+.text-logo-large {
+  font-size: 5rem;
+}
+
+/* BUTTONS */
+.button-colors {
+  background-color: #373737;
+  color: #fff500;
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 6px;
+}
+.topic-button:hover {
+  background-color: #fff500;
+  color: #373737;
+  border: none;
+}
+.nav-button {
+  height: 3rem;
+}
+.nav-button:hover {
+  background-color: #686868;
+  border: none;
+}
+.container-buttons-right {
+  display: flex;
+  justify-content: flex-end;
+}
