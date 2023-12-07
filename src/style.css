@@ -144,16 +144,19 @@ main {
   padding: 10px;
   border-radius: 6px;
 }
+
 .topic-button:hover {
   background-color: #fff500;
   color: #373737;
   border: none;
 }
+
 .question-button:focus {
   background-color: yellow;
   color: #373737;
   border: none;
 }
+
 .question-button:active {
   background-color: yellow;
   color: #373737;
