@@ -43,6 +43,17 @@ main {
   border-radius: 13px;
 }
 
+.quiz-content-container {
+  height: 500px;
+  width: 500px;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 13px;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -138,6 +149,17 @@ main {
   color: #373737;
   border: none;
 }
+.question-button:focus {
+  background-color: yellow;
+  color: #373737;
+  border: none;
+}
+.question-button:active {
+  background-color: yellow;
+  color: #373737;
+  border: none;
+}
+
 .nav-button {
   height: 3rem;
 }
@@ -148,4 +170,8 @@ main {
 .container-buttons-right {
   display: flex;
   justify-content: flex-end;
+}
+.container-buttons-spaced {
+  display: flex;
+  justify-content: space-evenly;
 }

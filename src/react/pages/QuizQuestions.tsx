@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import QuizButton from "../components/QuizButton";
+import Question from "../components/Question";
 import NavBar from "../components/NavBar";
 import {
   QuizContext,
@@ -19,54 +20,75 @@ const QuizQuestions: React.FC = () => {
   }
   const { quizDetails, setQuizDetails } = quizContext;
 
-  const [quizCount, setQuizCount] = useState();
-  const [quizData, setQuizData] = useState();
+  const [quizCount, setQuizCount] = useState(0);
+
   interface DataObject {
     response_code: number;
     results: object[];
   }
 
-  const tryQuizData = async (details: QuizDetailsConfig) => {
-    let data: DataObject | undefined;
-    let count = 0;
-    data = undefined;
-    if (data.response_code == 0) {
-      return data;
-    } else if (count >= 3) {
-      throw new Error("Cannot find data");
+  interface ResultsObject {
+    category: string;
+    correct_answer: string;
+    difficulty: string;
+    incorrect_answers: string[];
+    question: string;
+    type: string;
+  }
+
+  type resultsArray = ResultsObject[];
+
+  const [quizData, setQuizData] = useState<resultsArray>();
+
+  let count = 0;
+  const getQuizData: (
+    details: QuizDetailsConfig | null
+  ) => Promise<object | void> = async (details: QuizDetailsConfig | null) => {
+    console.log(details);
+    console.log(count);
+
+    if (details === null) {
+      throw new Error(
+        "Could not get the correct details for this quiz, please try again later"
+      );
+    }
+
+    const topicNumber = details.Topic.categoryNumber;
+    const diff = details.Difficulty;
+    console.log("boop");
+    const res = await fetch(
+      `https://opentdb.com/api.php?amount=10&category=${topicNumber}&difficulty=${diff}&type=multiple`
+    );
+    const data = await res.json();
+    console.log(data);
+
+    if (data.response_code === 0) {
+      setQuizData(data.results);
+      setQuizCount(0);
+      return;
+    } else if (count === 3) {
+      throw new Error(
+        "We had a problem fetching the quiz data please try again"
+      );
     } else {
       count++;
-      const topicNumber = details.Topic.categoryNumber;
-      const diff = details.Difficulty;
-      const res = await fetch(
-        `https://opentdb.com/api.php?amount=10&category=${topicNumber}&difficulty=${diff}&type=multiple`
-      );
-      const data = await res.json();
-      return tryQuizData(data);
-    }
-  };
-
-  const getQuizData = async (details: QuizDetailsConfig | null) => {
-    if (!details) {
-      throw new Error("Couldnt get details");
-    }
-    try {
-      const data = tryQuizData(details);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+      return await getQuizData(details);
     }
   };
 
   useEffect(() => {
-    getQuizData(quizDetails);
+    if (quizData === undefined) {
+      getQuizData(quizDetails);
+    }
   }, []);
 
   return (
     <main>
-      <h1 className="text-yellow text-logo-large font-monomaniacone">
-        "Questions Page"
-      </h1>
+      <Question
+        quizData={quizData}
+        quizCount={quizCount}
+        setQuizCount={setQuizCount}
+      />
     </main>
   );
 };
