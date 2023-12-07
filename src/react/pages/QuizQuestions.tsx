@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import QuizButton from "../components/QuizButton";
 import Question from "../components/Question";
 import NavBar from "../components/NavBar";
@@ -13,11 +14,13 @@ import {
 
 const QuizQuestions: React.FC = () => {
   const quizContext = useContext(QuizContext);
+  const navigate = useNavigate();
   // Check if quizContext is not null before using it
   if (!quizContext) {
     // Handle the case where quizContext is null
     return <div>Loading...</div>;
   }
+
   const { quizDetails, setQuizDetails } = quizContext;
 
   const [quizCount, setQuizCount] = useState(0);
@@ -77,6 +80,10 @@ const QuizQuestions: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!quizDetails) {
+      // Handle the case where quizDetails is empty
+      navigate("/home");
+    }
     if (quizData === undefined) {
       getQuizData(quizDetails);
     }
