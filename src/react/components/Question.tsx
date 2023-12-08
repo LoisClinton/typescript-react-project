@@ -31,28 +31,36 @@ const Question: React.FC<QuestionProps> = ({
     console.log("final score:", score);
   };
 
+  const textCleanup = (text: string) => {
+    const regex1 = /&quot;/g; //regex to replace &quot;
+    const regex2 = /&#039;/g; //regex to replace &#039;
+    const regex3 = /&rdquo;/g; //regex to replace &rdquo;
+    const textToReturn = text
+      .replace(regex1, '"')
+      .replace(regex2, "'")
+      .replace(regex3, "'");
+    return textToReturn;
+  };
+
   const getQuestion = () => {
-    console.log("Score before this question:", score);
-    console.log("quizData:", quizData, "quizCount:", quizCount);
+    console.log("Score before this question:", score); //REMOVE LATER
+    console.log("quizData:", quizData, "quizCount:", quizCount); //REMOVE LATER
+
     if (quizCount >= 10) {
       console.log("finishing");
       finishQuiz();
     }
+
     const theQuestion = quizData[quizCount];
-    const regex1 = /&quot;/g; //regex to replace &quot;
-    const regex2 = /&#039;/g; //regex to replace &#039;
     const questionString = theQuestion.question;
-    const questionToReturn = questionString
-      .replace(regex1, '"')
-      .replace(regex2, "'");
     const randomNum = Math.floor(Math.random() * 4);
     const correctAnswer = theQuestion.correct_answer;
     setCorrectAnswer(`${correctAnswer}`);
     const answersArray = theQuestion.incorrect_answers;
     answersArray.splice(randomNum, 0, correctAnswer);
-    console.log(answersArray);
+    console.log(answersArray); //REMOVE LATER
     setAllAnswers(answersArray);
-    setQuestion(`${questionToReturn}`);
+    setQuestion(`${questionString}`);
     setIsLoading(false);
   };
 
@@ -85,7 +93,7 @@ const Question: React.FC<QuestionProps> = ({
   return (
     <div className="quiz-content-container background-light-grey">
       <h3 className="text-yellow font-opensans container-heading">QUESTION</h3>
-      <p className="text-yellow font-opensans">{`${question}`}</p>
+      <p className="text-yellow font-opensans">{`${textCleanup(question)}`}</p>
       <h3 className="text-yellow font-opensans container-heading">ANSWERS:</h3>
 
       <div className="container-buttons-spaced">
@@ -93,7 +101,7 @@ const Question: React.FC<QuestionProps> = ({
           <button
             className="button-colors topic-button question-button"
             onClick={() => checkAnswer(answer)}
-          >{`${answer}`}</button>
+          >{`${textCleanup(answer)}`}</button>
         ))}
       </div>
 
