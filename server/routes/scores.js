@@ -42,15 +42,16 @@ router.post("/:topicName/:email", async (req, res) => {
       incorrect: req.body.incorrect,
     });
 
-    user.addScore(score);
+    await user.addScore(score);
 
-    const allScores = user.getScores({
+    const allScores = await User.findOne({
       where: {
-        topicName: req.params.topicName,
+        email: req.params.email,
       },
+      include: { model: Score },
     });
 
-    return res.send({ allScores });
+    return await res.send({ allScores });
   } catch (error) {
     //send any erros
 
