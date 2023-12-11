@@ -17,6 +17,19 @@ main {
   align-items: center;
 }
 
+.authentication-form {
+  height: 500px;
+  width: 500px;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 13px;
+}
+.authentication-form > * {
+  font-family: "Monomaniac One", sans-serif;
+}
 .navbar {
   width: 100vw;
   height: 150px;
@@ -101,7 +114,15 @@ main {
 .font-play {
   font-family: "Play", sans-serif;
 }
+/* FLEX */
+.flex-row {
+  display: flex;
+}
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
 /* TEXT */
 .text-yellow {
   color: #fff500;
@@ -136,6 +157,7 @@ main {
 }
 
 /* BUTTONS */
+
 .button-colors {
   background-color: #373737;
   color: #fff500;

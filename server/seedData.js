@@ -17,6 +17,11 @@ module.exports = {
       password: "euohfw7",
       email: "sfg@gmail.com",
     },
+    {
+      displayName: "Admin",
+      password: "lois52",
+      email: "lois@email.com",
+    },
   ],
   topics: [
     { name: "General Knowledge", categoryNumber: 9 },
@@ -24,7 +29,7 @@ module.exports = {
     { name: "Film", categoryNumber: 11 },
     { name: "Music", categoryNumber: 12 },
     { name: "Television", categoryNumber: 14 },
-    { name: "Video Games", categoryNumber: 15 },
+    { name: "Entertainment: Video Games", categoryNumber: 15 },
     { name: "Board Games", categoryNumber: 16 },
     { name: "Science & Nature", categoryNumber: 17 },
     { name: "Computers", categoryNumber: 18 },

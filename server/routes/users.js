@@ -47,6 +47,7 @@ router.post("/login", async (req, res) => {
         email: req.body.email,
       },
     });
+
     if (!user) {
       // checks if the user does not exist
       return res.status(404).send({ message: "Invalid user" });

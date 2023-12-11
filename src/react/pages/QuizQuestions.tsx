@@ -3,6 +3,8 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import QuizButton from "../components/QuizButton";
 import Question from "../components/Question";
 import NavBar from "../components/NavBar";
+import { UserContext } from "../App";
+
 import {
   QuizContext,
   QuizContextTypeWithNull,
@@ -14,6 +16,7 @@ import {
 
 const QuizQuestions: React.FC = () => {
   const quizContext = useContext(QuizContext);
+  const userContext = useContext(UserContext);
   const navigate = useNavigate();
   // Check if quizContext is not null before using it
   if (!quizContext) {
@@ -21,6 +24,7 @@ const QuizQuestions: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  const { currentUser, setCurrentUser } = userContext;
   const { quizDetails, setQuizDetails } = quizContext;
 
   const [quizCount, setQuizCount] = useState(0);

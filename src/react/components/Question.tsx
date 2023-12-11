@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import QuizDifficulty from "./QuizDifficulty";
 import { QuizDetailsConfig } from "../pages/Home";
+import { UserContext } from "../App";
 
 interface ResultsObject {
   category: string;
@@ -15,11 +16,14 @@ interface QuestionProps {
   quizCount: number;
   setQuizCount: React.Dispatch<React.SetStateAction<number>>;
 }
+
 const Question: React.FC<QuestionProps> = ({
   quizData,
   quizCount,
   setQuizCount,
 }) => {
+  const userContext = useContext(UserContext);
+
   const [question, setQuestion] = useState<string>("");
   const [correctAnswer, setCorrectAnswer] = useState<string>("");
   const [allAnswers, setAllAnswers] = useState<string[]>([]);
@@ -27,11 +31,52 @@ const Question: React.FC<QuestionProps> = ({
   const [score, setScore] = useState<number>(0);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
 
-  const finishQuiz = () => {
+  const { currentUser, setCurrentUser } = userContext;
+
+  const finishQuiz = async () => {
     console.log("final score:", score);
+    console.log("current user", currentUser);
+    console.log("quiz data", quizData);
+    const userEmail = currentUser.email;
+    const topicName = quizData[0].category;
+    const topicDifficulty = quizData[0].difficulty;
+
+    try {
+      console.log("try");
+      const response = await fetch(
+        `http://localhost:3000/api/scores/${topicName}/${userEmail}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            topicName: topicName,
+            difficulty: topicDifficulty,
+            correct: score,
+            incorrect: 10 - score,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log("data:", data);
+
+      if (response.status != 200) {
+        throw new Error(data.message);
+      }
+      setCurrentUser(data);
+      return;
+    } catch (err) {
+      console.log("catch");
+      console.error(err);
+    }
   };
 
   const textCleanup = (text: string) => {
+    // &eacute;  e with accent
+    //B&ouml;dvar
+    //&amp; and symbol
     const regex1 = /&quot;/g; //regex to replace &quot;
     const regex2 = /&#039;/g; //regex to replace &#039;
     const regex3 = /&rdquo;/g; //regex to replace &rdquo;
@@ -42,13 +87,12 @@ const Question: React.FC<QuestionProps> = ({
     return textToReturn;
   };
 
-  const getQuestion = () => {
+  const getQuestion = async () => {
     console.log("Score before this question:", score); //REMOVE LATER
     console.log("quizData:", quizData, "quizCount:", quizCount); //REMOVE LATER
 
     if (quizCount >= 10) {
-      console.log("finishing");
-      finishQuiz();
+      await finishQuiz();
     }
 
     const theQuestion = quizData[quizCount];
