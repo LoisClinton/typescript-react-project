@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import QuizDifficulty from "./QuizDifficulty";
 import { QuizDetailsConfig } from "../pages/Home";
 import { UserContext } from "../App";
@@ -23,6 +24,7 @@ const Question: React.FC<QuestionProps> = ({
   setQuizCount,
 }) => {
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [question, setQuestion] = useState<string>("");
   const [correctAnswer, setCorrectAnswer] = useState<string>("");
@@ -65,7 +67,13 @@ const Question: React.FC<QuestionProps> = ({
       if (response.status != 200) {
         throw new Error(data.message);
       }
+
       setCurrentUser(data);
+      setQuestion("");
+      setCorrectAnswer("");
+      setAllAnswers([]);
+      setScore(0);
+      navigate("/home");
       return;
     } catch (err) {
       console.log("catch");
