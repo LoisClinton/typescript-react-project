@@ -36,12 +36,16 @@ router.post("/:topicName/:email", async (req, res) => {
       },
     });
 
+    console.log(user);
+
     const score = await Score.create({
       topicName: req.body.topicName,
       difficulty: req.body.difficulty,
       correct: req.body.correct,
       incorrect: req.body.incorrect,
     });
+
+    console.log(score);
 
     await user.addScore(score);
 

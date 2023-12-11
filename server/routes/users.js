@@ -13,6 +13,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get user and scores
+router.get("/:userEmail/scores", async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        email: req.params.email,
+      },
+      include: { model: Score },
+    });
+
+    return res.send(user);
+  } catch (error) {
+    //send any erros
+    return res.send(error);
+  }
+});
+
 router.post("/register", async (req, res) => {
   //checks if all the input feilds are filled
   if (Object.values(req.body).includes("")) {

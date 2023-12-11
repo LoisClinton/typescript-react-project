@@ -3,7 +3,7 @@ import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home";
 import Authentication from "./pages/Authentication";
 import QuizQuestions from "./pages/QuizQuestions";
-import GlobalStats from "./pages/GlobalStats";
+import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import SelectQuiz from "./pages/SelectQuiz";
 
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <SelectQuiz /> },
           { path: "quiz", element: <QuizQuestions /> },
-          { path: "globalstats", element: <GlobalStats /> },
+          { path: "stats", element: <Stats /> },
           { path: "profile", element: <Profile /> },
         ],
       },

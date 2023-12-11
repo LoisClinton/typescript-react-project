@@ -68,13 +68,11 @@ const Question: React.FC<QuestionProps> = ({
         throw new Error(data.message);
       }
 
-      setCurrentUser(data);
       setQuestion("");
       setCorrectAnswer("");
       setAllAnswers([]);
       setScore(0);
       navigate("/home");
-      return;
     } catch (err) {
       console.log("catch");
       console.error(err);
@@ -85,6 +83,7 @@ const Question: React.FC<QuestionProps> = ({
     // &eacute;  e with accent
     //B&ouml;dvar
     //&amp; and symbol
+    //&Uuml;
     const regex1 = /&quot;/g; //regex to replace &quot;
     const regex2 = /&#039;/g; //regex to replace &#039;
     const regex3 = /&rdquo;/g; //regex to replace &rdquo;
