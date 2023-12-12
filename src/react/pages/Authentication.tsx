@@ -1,38 +1,27 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import QuizButton from "../components/QuizButton";
 import NavBar from "../components/NavBar";
 import Login from "../components/Login";
 import Register from "../components/Register";
-
-// https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
-// API thingy
-
-// interface UserInterface {
-//   displayName: string;
-//   age: number;
-//   favouriteTopic: string | null;
-//   bio: string | null;
-//   email: string;
-//   password: string;
-// }
-
-// the type of the context 'value' down below
-
-// type userContextType = {
-//   currentUser: UserInterface | null;
-//   setCurrentUser: React.Dispatch<React.SetStateAction<null>>;
-// };
-
-// type userContextTypeExtended = userContextType | null;
-
-// const UserContext = createContext();
+import { UserContext } from "../App";
 
 const Authentication: React.FC = () => {
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useState(true);
+  const { currentUser, setCurrentUser } = userContext;
 
   const loginFlipper = () => {
     setIsLogin(!isLogin);
   };
+
+  useEffect(() => {
+    if (currentUser != null) {
+      navigate("/home");
+    }
+  }, []);
 
   return (
     <main>

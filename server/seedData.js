@@ -44,4 +44,24 @@ module.exports = {
     { name: "Entertainment: Japanese Anime & Manga", categoryNumber: 31 },
     { name: "Entertainment: Cartoon & Animations", categoryNumber: 32 },
   ],
+  scores: [
+    {
+      topicName: "Entertainment: Board Games",
+      difficulty: "hard",
+      correct: 7,
+      incorrect: 3,
+    },
+    {
+      topicName: "Geography",
+      difficulty: "medium",
+      correct: 5,
+      incorrect: 5,
+    },
+    {
+      topicName: "Entertainment: Japanese Anime & Manga",
+      difficulty: "easy",
+      correct: 9,
+      incorrect: 1,
+    },
+  ],
 };
