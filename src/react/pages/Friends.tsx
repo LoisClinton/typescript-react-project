@@ -9,7 +9,7 @@ const Friends: React.FC = () => {
   return (
     <main>
       <h1 className="text-yellow text-logo-large font-monomaniacone">
-        "Friends Page"
+        Friends Page
       </h1>
     </main>
   );

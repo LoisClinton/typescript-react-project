@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import QuizButton from "../components/QuizButton";
 import { QuizContext, QuizContextTypeWithNull } from "../pages/Home"; //context for setting quiz details
+import { UserContext } from "../App";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
@@ -9,6 +10,7 @@ const SelectQuiz: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [allQuizTopics, setAllQuizTopics] = useState([]);
   const quizContext = useContext(QuizContext);
+  const userContext = useContext(UserContext);
 
   // Check if quizContext is not null before using it
   if (!quizContext) {
@@ -16,6 +18,7 @@ const SelectQuiz: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  const { currentUser, setCurrentUser } = userContext;
   const { quizDetails, setQuizDetails } = quizContext;
 
   // Now you can use quizDetails and setQuizDetails
@@ -41,7 +44,8 @@ const SelectQuiz: React.FC = () => {
           </h1>
 
           <h3 className="text-yellow font-opensans landing-slogan">
-            Need to strech your cognitive legs? Get Quizzing!
+            Need to strech your cognitive legs {currentUser.displayName}? Get
+            Quizzing!
           </h3>
 
           <div className="landing-page-topics-container">

@@ -22,6 +22,26 @@ const seed = async () => {
       console.log(userScores);
     });
 
+    const allUsers = await User.findAll();
+
+    const addFriendsPromises = allUsers.map(async (friend) => {
+      if (friend.displayName !== user.displayName) {
+        // Check if the users are already friends
+        const areFriends = await user.hasFriend(friend);
+
+        // If they are not friends, add the friend
+        if (!areFriends) {
+          await user.addFriend(friend);
+        }
+      }
+    });
+
+    // Wait for all addFriend operations to complete
+    await Promise.all(addFriendsPromises);
+
+    const hasFriends = await user.getFriends();
+
+    console.log("HAS FRIENDS:", hasFriends);
     console.log("db populated!");
   } catch (error) {
     console.error(error);

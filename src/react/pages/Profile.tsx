@@ -1,16 +1,31 @@
-import React, { useState, useEffect } from "react";
-import QuizButton from "../components/QuizButton";
-import NavBar from "../components/NavBar";
+import React, { useContext, useState, useEffect } from "react";
+import { UserContext } from "../App";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
 
 const Profile: React.FC = () => {
+  const userContext = useContext(UserContext);
+
+  const { currentUser, setCurrentUser } = userContext;
+
   return (
     <main>
       <h1 className="text-yellow text-logo-large font-monomaniacone">
-        "Profile Page"
+        Profile Page
       </h1>
+      <div>
+        <h2 className="text-yellow font-opensans">{currentUser.displayName}</h2>
+        <p className="text-yellow font-opensans">Age: {currentUser.age}</p>
+        <p className="text-yellow font-opensans">
+          Favourite Topic: {currentUser.favouriteTopic}
+        </p>
+        <p className="text-yellow font-opensans">Bio: {currentUser.bio}</p>
+        <p className="text-yellow font-opensans">Email: {currentUser.email}</p>
+        <p className="text-yellow font-opensans">
+          Password: {currentUser.password}
+        </p>
+      </div>
     </main>
   );
 };

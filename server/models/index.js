@@ -3,11 +3,18 @@ const Topic = require("./topic");
 const Score = require("./score");
 
 // Associations here
-// one to many => user to scores
+
+// One to Many => User to Scores
 User.hasMany(Score);
 Score.belongsTo(User);
 
-// Many to many User to User
+// Many to Many => User to User
+User.belongsToMany(User, {
+  as: "Friends",
+  through: "UserFriends", // your join table name
+  foreignKey: "userId",
+  otherKey: "friendId",
+});
 
 module.exports = {
   User,

@@ -19,8 +19,11 @@ module.exports = {
     },
     {
       displayName: "Admin",
-      password: "lois52",
+      age: 24,
+      favouriteTopic: "Science: Computers",
+      bio: "Hey I'm Lois and this is my website made with React and TypeScript",
       email: "lois@email.com",
+      password: "lois52",
     },
   ],
   topics: [

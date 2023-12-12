@@ -26,7 +26,7 @@ const Authentication: React.FC = () => {
   return (
     <main>
       <h1 className="text-yellow text-logo-large font-monomaniacone">
-        "Authentication Page"
+        Authentication Page
       </h1>
       {isLogin === true ? (
         <Login setIsLogin={setIsLogin} loginFlipper={loginFlipper} />
