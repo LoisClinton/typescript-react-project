@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../models");
+const { User, Score } = require("../models/index");
 
 router.get("/", async (req, res) => {
   try {
@@ -18,12 +18,26 @@ router.get("/:userEmail/scores", async (req, res) => {
   try {
     const user = await User.findOne({
       where: {
-        email: req.params.email,
+        email: `${req.params.userEmail}`,
       },
-      include: { model: Score },
     });
 
-    return res.send(user);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    const userID = user.id;
+
+    const scores = await Score.findAll({
+      where: {
+        UserId: userID,
+      },
+    });
+
+    if (!scores) {
+      return res.status(404).send({ message: "Scores not found" });
+    }
+
+    return res.send(scores);
   } catch (error) {
     //send any erros
     return res.send(error);

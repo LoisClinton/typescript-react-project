@@ -1,9 +1,7 @@
 const { users, topics, scores } = require("./seedData.js");
 
 const { sequelize } = require("./db");
-const { User } = require("./models");
-const { Topic } = require("./models");
-const { Score } = require("./models");
+const { User, Topic, Score } = require("./models/index");
 
 const seed = async () => {
   try {
@@ -14,18 +12,15 @@ const seed = async () => {
     await Promise.all(users.map((user) => User.create(user)));
     await Promise.all(topics.map((topic) => Topic.create(topic)));
 
-    const user = await User.findOne({
-      where: {
-        email: "lois@email.com",
-      },
-    });
+    const user = await User.findByPk(6);
+    console.log(user);
 
-    await Promise.all(
-      scores.map((score) => {
-        const newScore = Score.create(score);
-        user.addScore(newScore);
-      })
-    );
+    scores.map(async (score) => {
+      const newScore = await Score.create(score);
+      await user.addScore(newScore);
+      const userScores = await user.getScores();
+      console.log(userScores);
+    });
 
     console.log("db populated!");
   } catch (error) {
