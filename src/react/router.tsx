@@ -5,6 +5,7 @@ import Authentication from "./pages/Authentication";
 import QuizQuestions from "./pages/QuizQuestions";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
+import Friends from "./pages/Friends";
 import SelectQuiz from "./pages/SelectQuiz";
 
 const router = createBrowserRouter([
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
           { path: "quiz", element: <QuizQuestions /> },
           { path: "stats", element: <Stats /> },
           { path: "profile", element: <Profile /> },
+          { path: "friends", element: <Friends /> },
         ],
       },
     ],

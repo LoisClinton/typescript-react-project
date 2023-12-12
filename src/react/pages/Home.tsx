@@ -1,11 +1,9 @@
-import React, { createContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext, createContext, useState, useEffect } from "react";
+import { Outlet, useParams, useNavigate, Navigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import { UserContext } from "../App";
 
-// https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
-// API thingy
-//creating the context to store the searchText state
-
+//creating the context
 interface TopicInterface {
   name: string;
   categoryNumber: number;
@@ -30,9 +28,20 @@ type QuizContextTypeWithNull = QuizContextType | null;
 const QuizContext = createContext<QuizContextTypeWithNull>(null);
 
 const Home: React.FC = () => {
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const { currentUser, setCurrentUser } = userContext;
+
   const [quizDetails, setQuizDetails] = useState<QuizDetailsConfig | null>(
     null
   );
+
+  useEffect(() => {
+    if (currentUser == null) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <QuizContext.Provider value={{ quizDetails, setQuizDetails }}>
