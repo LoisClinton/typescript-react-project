@@ -32,6 +32,7 @@ const Question: React.FC<QuestionProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [score, setScore] = useState<number>(0);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [isPopup, setIsPopup] = useState<boolean>(false);
 
   const { currentUser, setCurrentUser } = userContext;
 
@@ -99,7 +100,8 @@ const Question: React.FC<QuestionProps> = ({
     console.log("quizData:", quizData, "quizCount:", quizCount); //REMOVE LATER
 
     if (quizCount >= 10) {
-      await finishQuiz();
+      // await finishQuiz();  // trying to implement a popup first then finish
+      setIsPopup(true);
     }
 
     const theQuestion = quizData[quizCount];
@@ -141,32 +143,57 @@ const Question: React.FC<QuestionProps> = ({
     fetchData();
   }, [quizData, quizCount]);
 
-  return (
-    <div className="quiz-content-container background-light-grey">
-      <h3 className="text-yellow font-opensans container-heading">QUESTION</h3>
-      <p className="text-yellow font-opensans">{`${textCleanup(question)}`}</p>
-      <h3 className="text-yellow font-opensans container-heading">ANSWERS:</h3>
-
-      <div className="container-buttons-spaced">
-        {allAnswers.map((answer) => (
+  if (isPopup) {
+    return (
+      <div className="quiz-content-container background-light-grey">
+        <h3 className="text-yellow font-opensans container-heading">
+          You got {score}/10 Answers right!
+        </h3>
+        <div className="container-buttons-spaced">
           <button
             className="button-colors topic-button question-button"
-            onClick={() => checkAnswer(answer)}
-          >{`${textCleanup(answer)}`}</button>
-        ))}
+            onClick={() => finishQuiz()}
+          >
+            {" "}
+            Finish Quiz
+          </button>
+        </div>
       </div>
+    );
+  } else {
+    return (
+      <div className="quiz-content-container background-light-grey">
+        <h3 className="text-yellow font-opensans container-heading">
+          QUESTION
+        </h3>
+        <p className="text-yellow font-opensans">{`${textCleanup(
+          question
+        )}`}</p>
+        <h3 className="text-yellow font-opensans container-heading">
+          ANSWERS:
+        </h3>
 
-      <div className="full-width container-buttons-right">
-        <button className="button-colors topic-button">Exit quiz</button>
-        <button
-          className="button-colors topic-button"
-          onClick={() => nextQuesttion()}
-        >
-          Continue
-        </button>
+        <div className="container-buttons-spaced">
+          {allAnswers.map((answer) => (
+            <button
+              className="button-colors topic-button question-button"
+              onClick={() => checkAnswer(answer)}
+            >{`${textCleanup(answer)}`}</button>
+          ))}
+        </div>
+
+        <div className="full-width container-buttons-right">
+          <button className="button-colors topic-button">Exit quiz</button>
+          <button
+            className="button-colors topic-button"
+            onClick={() => nextQuesttion()}
+          >
+            Continue
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Question;

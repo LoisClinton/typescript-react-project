@@ -28,6 +28,11 @@ const Stats: React.FC = () => {
           <h1 className="text-yellow text-logo-large font-monomaniacone">
             Statistics Page
           </h1>
+          <div>
+            <button>Global</button>
+            <button>Indivdual</button>
+            <button>Friends</button>
+          </div>
           {userScores.map((score) => {
             return (
               <div>
