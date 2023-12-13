@@ -63,7 +63,7 @@ router.get("/:id/friends", async (req, res) => {
   }
 });
 
-// get user and friends
+// User add friend
 router.put("/:id/:friendName", async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);

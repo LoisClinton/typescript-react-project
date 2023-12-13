@@ -87,6 +87,10 @@ main {
   background-color: #373737;
   color: #fff500;
 }
+/* SELF ALIGN */
+.self-start {
+  align-self: flex-start;
+}
 
 /* WIDTHS */
 .full-width {

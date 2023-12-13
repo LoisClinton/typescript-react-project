@@ -1,16 +1,100 @@
-import React, { useState, useEffect } from "react";
-import QuizButton from "../components/QuizButton";
-import NavBar from "../components/NavBar";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { UserContext } from "../App";
+import AllUsers from "../components/AllUsers";
+import MyFriends from "../components/MyFriends";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
 
 const Friends: React.FC = () => {
+  const [isAllUsers, setIsAllUsers] = useState<boolean>(false);
+  const [usersFriends, setUsersFriends] = useState();
+  const userContext = useContext(UserContext);
+  const { currentUser, setCurrentUser } = userContext;
+
+  const userId = currentUser.id;
+
+  const addFriend = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/users/${userId}/${friendName}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (response.status != 200) {
+        throw new Error(data.message);
+      }
+
+      return;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getFriends = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/users/${userId}/friends`
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (response.status != 200) {
+        throw new Error(data.message);
+      }
+
+      setUsersFriends(data);
+
+      return;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getFriends();
+  }, []);
+
   return (
     <main>
       <h1 className="text-yellow text-logo-large font-monomaniacone">
         Friends Page
       </h1>
+      <div>
+        <button onClick={() => setIsAllUsers(false)}>Friends</button>
+        <button onClick={() => setIsAllUsers(true)}>All Users</button>
+      </div>
+      {isAllUsers ? (
+        <AllUsers
+          isAllUsers={isAllUsers}
+          setIsAllUsers={setIsAllUsers}
+          usersFriends={usersFriends}
+          setUsersFriends={setUsersFriends}
+          addFriend={addFriend}
+          getFriends={getFriends}
+        />
+      ) : (
+        <MyFriends
+          isAllUsers={isAllUsers}
+          setIsAllUsers={setIsAllUsers}
+          usersFriends={usersFriends}
+          setUsersFriends={setUsersFriends}
+          addFriend={addFriend}
+          getFriends={getFriends}
+        />
+      )}
     </main>
   );
 };
