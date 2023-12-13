@@ -44,6 +44,64 @@ router.get("/:userEmail/scores", async (req, res) => {
   }
 });
 
+// get a users friends
+router.get("/:id/friends", async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const allFriends = await user.getFriends();
+
+    // returns all friends of the person
+    return res.send(allFriends);
+  } catch (error) {
+    //send any erros
+    return res.send(error);
+  }
+});
+
+// get user and friends
+router.put("/:id/:friendName", async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    const friend = await User.findOne({
+      where: {
+        displayName: `${req.params.friendName}`,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    if (!friend) {
+      return res.status(404).send({ message: "Friend User not found" });
+    }
+
+    //so you cant add yourself as a friend
+    if (friend.displayName !== user.displayName) {
+      // Check if the users are already friends
+      const areFriends = await user.hasFriend(friend);
+
+      // If they are not friends, add the friend
+      if (!areFriends) {
+        await user.addFriend(friend);
+      }
+    }
+
+    const hasFriends = await user.getFriends();
+
+    // returns all friends of the person
+    return res.send(hasFriends);
+  } catch (error) {
+    //send any erros
+    return res.send(error);
+  }
+});
+
 router.post("/register", async (req, res) => {
   //checks if all the input feilds are filled
   if (Object.values(req.body).includes("")) {
