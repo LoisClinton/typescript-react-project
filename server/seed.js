@@ -22,22 +22,14 @@ const seed = async () => {
       console.log(userScores);
     });
 
-    const allUsers = await User.findAll();
+    const friendOne = await User.findByPk(1);
+    const friendTwo = await User.findByPk(2);
+    const friendThree = await User.findByPk(3);
 
-    const addFriendsPromises = allUsers.map(async (friend) => {
-      if (friend.displayName !== user.displayName) {
-        // Check if the users are already friends
-        const areFriends = await user.hasFriend(friend);
-
-        // If they are not friends, add the friend
-        if (!areFriends) {
-          await user.addFriend(friend);
-        }
-      }
-    });
-
-    // Wait for all addFriend operations to complete
-    await Promise.all(addFriendsPromises);
+    // Adding three friends so I can test adding friends
+    await user.addFriend(friendOne);
+    await user.addFriend(friendTwo);
+    await user.addFriend(friendThree);
 
     const hasFriends = await user.getFriends();
 

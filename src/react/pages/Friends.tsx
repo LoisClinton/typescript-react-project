@@ -13,9 +13,9 @@ const Friends: React.FC = () => {
   const userContext = useContext(UserContext);
   const { currentUser, setCurrentUser } = userContext;
 
-  const userId = currentUser.id;
+  const contextUserId = currentUser.id;
 
-  const addFriend = async () => {
+  const addFriend = async (userId, friendName) => {
     try {
       const response = await fetch(
         `http://localhost:3000/api/users/${userId}/${friendName}`,
@@ -41,7 +41,7 @@ const Friends: React.FC = () => {
     }
   };
 
-  const getFriends = async () => {
+  const getFriends = async (userId) => {
     try {
       const response = await fetch(
         `http://localhost:3000/api/users/${userId}/friends`
@@ -64,8 +64,8 @@ const Friends: React.FC = () => {
   };
 
   useEffect(() => {
-    getFriends();
-  }, []);
+    getFriends(contextUserId);
+  }, [isAllUsers]);
 
   return (
     <main>

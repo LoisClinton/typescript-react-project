@@ -62,7 +62,13 @@ const AllUsers: React.FC = ({
                     <p className=" self-start text-yellow font-opensans">
                       Bio: {user.bio}
                     </p>
-                    <button>ADD FRIEND</button>
+                    <button
+                      onClick={() =>
+                        addFriend(currentUser.id, user.displayName)
+                      }
+                    >
+                      ADD FRIEND
+                    </button>
                   </div>
                 );
               }
