@@ -1,7 +1,6 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
-import QuizButton from "../components/QuizButton";
-import NavBar from "../components/NavBar";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Login from "../components/Login";
 import Register from "../components/Register";
 import { UserContext } from "../App";
@@ -18,7 +17,9 @@ const Authentication: React.FC = () => {
   };
 
   useEffect(() => {
-    if (currentUser != null) {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
       navigate("/home");
     }
   }, []);

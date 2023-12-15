@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
-import QuizButton from "../components/QuizButton";
+import { useNavigate } from "react-router-dom";
 import Question from "../components/Question";
-import NavBar from "../components/NavBar";
 import { UserContext } from "../App";
 
 import {
@@ -10,9 +8,6 @@ import {
   QuizContextTypeWithNull,
   QuizDetailsConfig,
 } from "../pages/Home"; //context for setting quiz details
-
-// https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
-// API thingy
 
 const QuizQuestions: React.FC = () => {
   const quizContext = useContext(QuizContext);
@@ -24,7 +19,6 @@ const QuizQuestions: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const { currentUser, setCurrentUser } = userContext;
   const { quizDetails, setQuizDetails } = quizContext;
 
   const [quizCount, setQuizCount] = useState(0);

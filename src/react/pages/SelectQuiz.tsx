@@ -30,6 +30,13 @@ const SelectQuiz: React.FC = () => {
   }
 
   useEffect(() => {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
+    }
+  }, []);
+
+  useEffect(() => {
     getAllQuizTopics();
   }, []);
 

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { QuizDetailsConfig } from "../pages/Home";
+import { UserContext } from "../App";
 
 interface QuizDifficultyProps {
   quizTopic: { name: string; categoryNumber: number };

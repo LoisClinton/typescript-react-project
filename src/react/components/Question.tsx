@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
-import QuizDifficulty from "./QuizDifficulty";
-import { QuizDetailsConfig } from "../pages/Home";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import textCleanup from "../Functions/textCleanup";
 
 interface ResultsObject {
   category: string;
@@ -80,21 +79,6 @@ const Question: React.FC<QuestionProps> = ({
     }
   };
 
-  const textCleanup = (text: string) => {
-    // &eacute;  e with accent
-    //B&ouml;dvar
-    //&amp; and symbol
-    //&Uuml;
-    const regex1 = /&quot;/g; //regex to replace &quot;
-    const regex2 = /&#039;/g; //regex to replace &#039;
-    const regex3 = /&rdquo;/g; //regex to replace &rdquo;
-    const textToReturn = text
-      .replace(regex1, '"')
-      .replace(regex2, "'")
-      .replace(regex3, "'");
-    return textToReturn;
-  };
-
   const getQuestion = async () => {
     console.log("Score before this question:", score); //REMOVE LATER
     console.log("quizData:", quizData, "quizCount:", quizCount); //REMOVE LATER
@@ -133,7 +117,15 @@ const Question: React.FC<QuestionProps> = ({
     }
 
     setQuizCount(quizCount + 1);
+    setIsCorrect(false);
   };
+
+  useEffect(() => {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

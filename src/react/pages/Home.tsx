@@ -37,6 +37,24 @@ const Home: React.FC = () => {
     null
   );
 
+  const [userScores, setUserScores] = useState();
+
+  const getScoresAverage = async () => {
+    console.log(currentUser.email);
+    const res = await fetch(
+      `http://localhost:3000/api/users/${currentUser.email}/scores`
+    );
+    const data = await res.json();
+    setUserScores(data);
+  };
+
+  useEffect(() => {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
+    }
+  }, []);
+
   useEffect(() => {
     if (currentUser == null) {
       navigate("/");

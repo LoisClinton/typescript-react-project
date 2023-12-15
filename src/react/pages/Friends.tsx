@@ -13,8 +13,6 @@ const Friends: React.FC = () => {
   const userContext = useContext(UserContext);
   const { currentUser, setCurrentUser } = userContext;
 
-  const contextUserId = currentUser.id;
-
   const addFriend = async (userId, friendName) => {
     try {
       const response = await fetch(
@@ -64,6 +62,11 @@ const Friends: React.FC = () => {
   };
 
   useEffect(() => {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
+    }
+    const contextUserId = storageItem.id;
     getFriends(contextUserId);
   }, [isAllUsers]);
 
@@ -73,8 +76,18 @@ const Friends: React.FC = () => {
         Friends Page
       </h1>
       <div>
-        <button onClick={() => setIsAllUsers(false)}>Friends</button>
-        <button onClick={() => setIsAllUsers(true)}>All Users</button>
+        <button
+          className="button-colors question-button topic-button"
+          onClick={() => setIsAllUsers(false)}
+        >
+          Friends
+        </button>
+        <button
+          className="button-colors question-button topic-button"
+          onClick={() => setIsAllUsers(true)}
+        >
+          All Users
+        </button>
       </div>
       {isAllUsers ? (
         <AllUsers

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 
@@ -14,6 +14,7 @@ const NavBar: React.FC = () => {
 
   const signOutUser = () => {
     setCurrentUser(null);
+    localStorage.clear();
     navigate("/");
   };
 

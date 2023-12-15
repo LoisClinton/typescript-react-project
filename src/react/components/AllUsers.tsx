@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../App";
 
 const AllUsers: React.FC = ({
@@ -35,6 +34,10 @@ const AllUsers: React.FC = ({
   };
 
   useEffect(() => {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
+    }
     getUsers();
   }, []);
 

@@ -1,6 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import QuizButton from "../components/QuizButton";
-import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router";
 import { UserContext } from "../App";
 
@@ -51,6 +49,13 @@ const Login: React.FC = ({ setIsLogin, loginFlipper }) => {
       console.error(err);
     }
   }
+
+  useEffect(() => {
+    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
+    if (storageItem) {
+      setCurrentUser(storageItem);
+    }
+  }, []);
 
   return (
     <>

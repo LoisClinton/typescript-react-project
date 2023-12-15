@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
-import { UserContext } from "../App";
+import React from "react";
 
 const MyFriends: React.FC = ({
   isAllUsers,
