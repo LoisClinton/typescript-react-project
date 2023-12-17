@@ -66,6 +66,7 @@ const AllUsers: React.FC = ({
                       Bio: {user.bio}
                     </p>
                     <button
+                      className="button-colors topic-button"
                       onClick={() =>
                         addFriend(currentUser.id, user.displayName)
                       }

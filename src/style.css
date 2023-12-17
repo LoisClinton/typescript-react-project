@@ -53,6 +53,7 @@ main {
   height: 200px;
   width: 300px;
   margin: 2%;
+  padding: 2%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -93,6 +94,11 @@ main {
   color: #fff500;
 }
 
+.difficulty-popup-heading {
+  width: 100%;
+  text-align: center;
+}
+
 .stats-topic-container {
   height: 200px;
   width: 300px;
@@ -102,6 +108,19 @@ main {
   justify-content: space-between;
   align-items: center;
   border-radius: 13px;
+}
+
+.stats-bar-container {
+  background-color: #373737;
+  height: 20%;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.stats-bar {
+  background-color: #fff500;
+  height: 100%;
+  border-radius: 6px;
 }
 
 /* SELF ALIGN */

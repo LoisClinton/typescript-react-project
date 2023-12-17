@@ -40,7 +40,7 @@ const Question: React.FC<QuestionProps> = ({
     console.log("current user", currentUser);
     console.log("quiz data", quizData);
     const userEmail = currentUser.email;
-    const topicName = quizData[0].category;
+    const topicName = textCleanup(quizData[0].category);
     const topicDifficulty = quizData[0].difficulty;
 
     try {

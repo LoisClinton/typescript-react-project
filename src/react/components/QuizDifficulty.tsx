@@ -44,24 +44,26 @@ const QuizDifficulty: React.FC<QuizDifficultyProps> = ({
   return (
     <div className="backdrop">
       <div className="difficulty-popup">
-        <h1>heeellloooo</h1>
+        <h1 className="difficulty-popup-heading font-monomaniacone">
+          Select your quiz difficulty:
+        </h1>
         <button
-          className="button-colors topic-button"
+          className="button-colors topic-button font-opensans"
           onClick={() => quizEasy()}
         >
-          Just a warm up
+          Easy
         </button>
         <button
-          className="button-colors topic-button"
+          className="button-colors topic-button font-opensans"
           onClick={() => quizMedium()}
         >
-          Smarty Pants
+          Medium
         </button>
         <button
-          className="button-colors topic-button"
+          className="button-colors topic-button font-opensans"
           onClick={() => quizHard()}
         >
-          Einstein who?
+          Hard
         </button>
       </div>
     </div>
