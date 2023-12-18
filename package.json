@@ -1,7 +1,6 @@
 {
   "name": "typescript-react-project",
   "version": "1.0.0",
-  "source": "src/index.html",
   "scripts": {
     "test": "jest",
     "client-dev": "parcel src/index.html --open",

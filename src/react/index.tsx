@@ -5,7 +5,7 @@ import "regenerator-runtime/runtime";
 
 import { App } from "./App.js";
 
-const root = createRoot(document.getElementById("app")!);
+const root = createRoot(document.getElementById("root")!);
 root.render(<App />);
 
 // REMOVED THE FOLLOWING:
