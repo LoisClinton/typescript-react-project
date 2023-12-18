@@ -35,10 +35,10 @@ const QuizButton: React.FC<QuizButtonProps> = ({
     const topicName = quizTopic.name;
     const res = await fetch(`http://localhost:3000/api/scores/${topicName}`);
     const topicScores = await res.json();
-    console.log("topicScores:", topicScores);
+    // console.log("topicScores:", topicScores);
 
     if (topicScores.length) {
-      console.log("Inside if statement");
+      // console.log("Inside if statement");
       let totalCorrect = 0;
       let totalIncorrect = 0;
 
@@ -47,17 +47,17 @@ const QuizButton: React.FC<QuizButtonProps> = ({
         totalIncorrect += score.incorrect;
       });
 
-      console.log(
-        "totalCorrect:",
-        totalCorrect,
-        "totalIncorrect:",
-        totalIncorrect
-      );
+      // console.log(
+      //   "totalCorrect:",
+      //   totalCorrect,
+      //   "totalIncorrect:",
+      //   totalIncorrect
+      // );
 
       const totalScoresFraction =
         totalCorrect / (totalCorrect + totalIncorrect);
       const totalScoresPercentage = totalScoresFraction * 100;
-      console.log(`total scores percentage:`, totalScoresPercentage);
+      // console.log(`total scores percentage:`, totalScoresPercentage);
       setAverageTopicScores(totalScoresPercentage);
     }
   };

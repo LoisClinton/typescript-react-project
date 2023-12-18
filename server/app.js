@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const path = require("path");
 const cors = require("cors");
 
-//Allow CORS requests
+// Enable CORS for all routes
 app.use(cors());
 
 // logging middleware

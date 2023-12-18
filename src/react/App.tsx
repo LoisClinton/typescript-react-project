@@ -13,9 +13,15 @@ const App: React.FC = () => {
 
   // local storage stuff
   useEffect(() => {
-    const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
-    if (storageItem) {
-      setCurrentUser(storageItem);
+    let value = localStorage.getItem("currentUserKey");
+
+    if (typeof value === "string") {
+      // Checks for its a string first
+      const storageItem = JSON.parse(value);
+
+      if (storageItem) {
+        setCurrentUser(storageItem);
+      }
     }
   }, []);
 

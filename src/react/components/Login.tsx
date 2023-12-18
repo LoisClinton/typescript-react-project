@@ -80,7 +80,7 @@ const Login: React.FC = ({ setIsLogin, loginFlipper }) => {
           <p className="text-yellow">Password</p>
           <input
             id="password-input"
-            type="text"
+            type="password"
             placeholder="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}

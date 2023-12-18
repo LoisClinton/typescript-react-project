@@ -3,29 +3,6 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../App";
 import StatsTopics from "../components/StatsTopics";
 
-{
-  /* <div className="landing-page-topics-container">
-{userScores.map((score) => {
-  return (
-    <div className="stats-topic-container background-light-grey">
-      <h2 className="text-yellow font-opensans">
-        {score.topicName}
-      </h2>
-      <h3 className="text-yellow font-opensans">
-        Difficulty: {score.difficulty}
-      </h3>
-      <p className="text-yellow font-opensans">
-        Correct: {score.correct}
-      </p>
-      <p className="text-yellow font-opensans">
-        Incorrect: {score.incorrect}
-      </p>
-    </div>
-  );
-})}
-</div> */
-}
-
 const Stats: React.FC = () => {
   type viewType = "Individual" | "Global" | "Friends";
   const userContext = useContext(UserContext);
@@ -37,21 +14,19 @@ const Stats: React.FC = () => {
   const [averageOverall, setAverageOverall] = useState();
 
   const getTopics = async () => {
-    console.log(currentUser.email);
     const res = await fetch(`http://localhost:3000/api/topics/`);
     const data = await res.json();
-    console.log("topics", data);
     setTopics(data);
   };
 
-  const getOverallPercentage = async () => {
-    const userName = currentUser.displayName;
-    const res = await fetch(`http://localhost:3000/api/users/${userName}`);
+  const getOverallPercentage = async (user) => {
+    const userEmail = user.email;
+    const res = await fetch(
+      `http://localhost:3000/api/users/${userEmail}/scores`
+    );
     const userScores = await res.json();
-    console.log("userScores:", userScores);
 
     if (userScores.length) {
-      console.log("Inside if statement");
       let totalCorrect = 0;
       let totalIncorrect = 0;
 
@@ -60,17 +35,9 @@ const Stats: React.FC = () => {
         totalIncorrect += score.incorrect;
       });
 
-      console.log(
-        "totalCorrect:",
-        totalCorrect,
-        "totalIncorrect:",
-        totalIncorrect
-      );
-
       const totalScoresFraction =
         totalCorrect / (totalCorrect + totalIncorrect);
-      const totalScoresPercentage = totalScoresFraction * 100;
-      console.log(`total scores percentage:`, totalScoresPercentage);
+      const totalScoresPercentage = (totalScoresFraction * 100).toFixed(2);
       setAverageOverall(totalScoresPercentage);
     }
   };
@@ -79,15 +46,13 @@ const Stats: React.FC = () => {
     const storageItem = JSON.parse(localStorage.getItem("currentUserKey"));
     if (storageItem) {
       setCurrentUser(storageItem);
+      getOverallPercentage(storageItem);
     }
   }, []);
 
   useEffect(() => {
-    if (currentUser) {
-      getTopics();
-      getOverallPercentage();
-    }
-  }, [currentUser]);
+    getTopics();
+  }, []);
 
   let borderRadius: number;
 

@@ -79,7 +79,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
       >
         <h2 className="text-yellow">Register</h2>
         <div className="">
-          <p className="text-yellow">Display Name</p>
+          <h3 className="text-yellow">Display Name</h3>
           <input
             id="display-name-input"
             type="text"
@@ -89,20 +89,19 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
           />
         </div>
 
-        <div className="flex-row">
-          <p className="text-yellow">Age</p>
-          <p className="text-yellow">Favourite Topic</p>
-        </div>
+        <div>
+          <h3 className="text-yellow">Age</h3>
 
-        <div className="">
-          <input
-            id="age-input"
-            type="number"
-            placeholder="Age"
-            value={age}
-            onChange={(event) => setAge(event.target.value)}
-          />
-
+          <div className="">
+            <input
+              id="age-input"
+              type="number"
+              placeholder="Age"
+              value={age}
+              onChange={(event) => setAge(event.target.value)}
+            />
+          </div>
+          <h3 className="text-yellow">Favourite Topic</h3>
           <select
             name="favouriteTopic"
             id="favourite-topic"
@@ -133,7 +132,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
         </div>
 
         <div className="">
-          <p className="text-yellow">Bio</p>
+          <h3 className="text-yellow">Bio</h3>
           <input
             id="bio-input"
             type="textarea"
@@ -144,7 +143,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
         </div>
 
         <div className="">
-          <p className="text-yellow">Email</p>
+          <h3 className="text-yellow">Email</h3>
           <input
             id="email-input"
             type="text"
@@ -155,7 +154,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
         </div>
 
         <div className="">
-          <p className="text-yellow">Password</p>
+          <h3 className="text-yellow">Password</h3>
           <input
             id="password-input"
             type="password"
@@ -165,7 +164,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
           />
         </div>
 
-        <p className="text-yellow">
+        <h3 className="text-yellow">
           Already have an account?
           <a
             className=""
@@ -175,7 +174,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
           >
             {" Login"}
           </a>
-        </p>
+        </h3>
         <button className="button-colors topic-button" type="submit">
           Create Account
         </button>

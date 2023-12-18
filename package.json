@@ -1,13 +1,14 @@
 {
   "name": "typescript-react-project",
   "version": "1.0.0",
+  "source": "src/index.html",
   "scripts": {
     "test": "jest",
-    "client-dev": "parcel public/index.html --open",
+    "client-dev": "parcel src/index.html --open",
     "server-dev": "nodemon server/server.js",
     "seed": "node server/seed.js",
-    "start2": "parcel src/index.html",
-    "start": "parcel build src/index.html && npm run seed && node server/server.js"
+    "start": "parcel",
+    "build": "parcel build src/index.html && npm run seed && node server/server.js"
   },
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
