@@ -7,7 +7,7 @@
     "client-dev": "parcel src/index.html --open",
     "server-dev": "nodemon server/server.js",
     "seed": "node server/seed.js",
-    "start": "parcel",
+    "start": "node server/server.js",
     "build": "parcel build src/index.html && npm run seed && node server/server.js"
   },
   "dependencies": {
