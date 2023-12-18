@@ -2,6 +2,7 @@ import React, { useContext, createContext, useState, useEffect } from "react";
 import { Outlet, useParams, useNavigate, Navigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { UserContext } from "../App";
+import apiURL from "../api";
 
 //creating the context
 interface TopicInterface {
@@ -41,9 +42,7 @@ const Home: React.FC = () => {
 
   const getScoresAverage = async () => {
     console.log(currentUser.email);
-    const res = await fetch(
-      `http://localhost:3000/api/users/${currentUser.email}/scores`
-    );
+    const res = await fetch(`${apiURL}/api/users/${currentUser.email}/scores`);
     const data = await res.json();
     setUserScores(data);
   };

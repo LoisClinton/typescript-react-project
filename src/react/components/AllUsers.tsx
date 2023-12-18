@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App";
+import apiURL from "../api";
 
 const AllUsers: React.FC = ({
   isAllUsers,
@@ -15,7 +16,7 @@ const AllUsers: React.FC = ({
 
   const getUsers = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/users/`);
+      const response = await fetch(`${apiURL}/api/users/`);
 
       const data = await response.json();
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../App";
+import apiURL from "../api";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
@@ -22,7 +23,7 @@ const Register: React.FC = ({ setIsLogin, loginFlipper }) => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      const response = await fetch(`http://localhost:3000/api/users/register`, {
+      const response = await fetch(`${apiURL}/api/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

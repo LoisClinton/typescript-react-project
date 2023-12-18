@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import textCleanup from "../Functions/textCleanup";
+import apiURL from "../api";
 
 interface ResultsObject {
   category: string;
@@ -46,7 +47,7 @@ const Question: React.FC<QuestionProps> = ({
     try {
       console.log("try");
       const response = await fetch(
-        `http://localhost:3000/api/scores/${topicName}/${userEmail}`,
+        `${apiURL}/api/scores/${topicName}/${userEmail}`,
         {
           method: "POST",
           headers: {

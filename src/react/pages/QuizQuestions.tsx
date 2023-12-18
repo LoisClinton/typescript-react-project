@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Question from "../components/Question";
 import { UserContext } from "../App";
+import apiURL from "../api";
 
 import {
   QuizContext,

@@ -3,6 +3,7 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../App";
 import AllUsers from "../components/AllUsers";
 import MyFriends from "../components/MyFriends";
+import apiURL from "../api";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
@@ -16,7 +17,7 @@ const Friends: React.FC = () => {
   const addFriend = async (userId, friendName) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/users/${userId}/${friendName}`,
+        `${apiURL}/api/users/${userId}/${friendName}`,
         {
           method: "PUT",
           headers: {
@@ -41,9 +42,7 @@ const Friends: React.FC = () => {
 
   const getFriends = async (userId) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/users/${userId}/friends`
-      );
+      const response = await fetch(`${apiURL}/api/users/${userId}/friends`);
 
       const data = await response.json();
 

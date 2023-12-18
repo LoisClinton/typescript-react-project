@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import QuizDifficulty from "./QuizDifficulty";
 import { QuizDetailsConfig } from "../pages/Home";
+import apiURL from "../api";
 
 interface QuizButtonProps {
   index: number;
@@ -33,7 +34,7 @@ const QuizButton: React.FC<QuizButtonProps> = ({
 
   const getTopicScoresPercentage = async () => {
     const topicName = quizTopic.name;
-    const res = await fetch(`http://localhost:3000/api/scores/${topicName}`);
+    const res = await fetch(`${apiURL}/api/scores/${topicName}`);
     const topicScores = await res.json();
     // console.log("topicScores:", topicScores);
 

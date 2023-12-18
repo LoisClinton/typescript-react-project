@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import QuizButton from "../components/QuizButton";
 import { QuizContext, QuizContextTypeWithNull } from "../pages/Home"; //context for setting quiz details
 import { UserContext } from "../App";
+import apiURL from "../api";
 
 // https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple
 // API thingy
@@ -23,7 +24,7 @@ const SelectQuiz: React.FC = () => {
 
   // Now you can use quizDetails and setQuizDetails
   async function getAllQuizTopics() {
-    const res = await fetch(`http://localhost:3000/api/topics/`);
+    const res = await fetch(`${apiURL}/api/topics/`);
     const data = await res.json();
     setAllQuizTopics(data);
     setIsLoading(false);

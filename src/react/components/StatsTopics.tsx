@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../App";
+import apiURL from "../api";
 
 const StatsTopics: React.FC = ({ topicName }) => {
   const userContext = useContext(UserContext);
@@ -9,7 +10,7 @@ const StatsTopics: React.FC = ({ topicName }) => {
   const [averageTopicScores, setAverageTopicScores] = useState();
 
   const getTopicScoresPercentage = async () => {
-    const res = await fetch(`http://localhost:3000/api/scores/${topicName}`);
+    const res = await fetch(`${apiURL}/api/scores/${topicName}`);
     const topicScores = await res.json();
 
     if (topicScores.length) {

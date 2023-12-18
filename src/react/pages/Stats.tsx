@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../App";
 import StatsTopics from "../components/StatsTopics";
+import apiURL from "../api";
 
 const Stats: React.FC = () => {
   type viewType = "Individual" | "Global" | "Friends";
@@ -14,16 +15,14 @@ const Stats: React.FC = () => {
   const [averageOverall, setAverageOverall] = useState();
 
   const getTopics = async () => {
-    const res = await fetch(`http://localhost:3000/api/topics/`);
+    const res = await fetch(`${apiURL}/api/topics/`);
     const data = await res.json();
     setTopics(data);
   };
 
   const getOverallPercentage = async (user) => {
     const userEmail = user.email;
-    const res = await fetch(
-      `http://localhost:3000/api/users/${userEmail}/scores`
-    );
+    const res = await fetch(`${apiURL}/api/users/${userEmail}/scores`);
     const userScores = await res.json();
 
     if (userScores.length) {
