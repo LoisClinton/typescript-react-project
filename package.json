@@ -7,7 +7,7 @@
     "server-dev": "nodemon server/server.js",
     "seed": "node server/seed.js",
     "start": "node server/server.js",
-    "build": "parcel build src/index.html && npm run seed && node server/server.js"
+    "build": "parcel build src/index.html && npm run seed"
   },
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
