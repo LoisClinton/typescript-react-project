@@ -1,4 +1,11 @@
-node_modules
+node_modules/
+.DS_Store
+.vscode
+.idea
+.env
 dist
 .cache
-yarn.lock
+.parcel-cache
+
+#sqlite
+*.sqlite
