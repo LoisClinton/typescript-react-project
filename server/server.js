@@ -9,7 +9,6 @@ const init = async () => {
 
     app.listen(PORT, () => {
       console.log(`Server listening at http://localhost:${PORT}`);
-      console.log(process.env.REACT_APP_API_URL);
     });
   } catch (error) {
     console.error("Error starting server:", error);
